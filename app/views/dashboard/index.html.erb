@@ -2,9 +2,9 @@
 <%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
 
 <div>
-	<%= pie_chart @companies %>
+	<% pie = {"Compañia": @companies,"Usuarios": @users, "Reclamos": @claims} %>
+
+	<%= pie_chart pie %>
+
 </div>
-<div>
-<% my_chart = {"ejemplo1": 20, "ejemplo2": 30} %>
-<%= pie_chart my_chart %>	
-</div>
+
