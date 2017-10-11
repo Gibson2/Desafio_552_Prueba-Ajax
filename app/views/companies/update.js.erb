@@ -1,0 +1,4 @@
+
+$('#modal_company_<%= @company.id %>').modal('close');
+$('#company_<%= @company.id %>').empty();
+$('tbody').prepend("<%= j render partial: @company %>");

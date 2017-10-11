@@ -1,15 +1,19 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  #before_action :authenticate_user!
 
   # GET /companies
   # GET /companies.json
   def index
     @companies = Company.all
+    @company = Company.new
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @claim = @company.claims.build
+    @claims = @company.claims
   end
 
   # GET /companies/new
@@ -30,9 +34,11 @@ class CompaniesController < ApplicationController
       if @company.save
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @company.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -44,9 +50,11 @@ class CompaniesController < ApplicationController
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
+        format.JS
       else
         format.html { render :edit }
         format.json { render json: @company.errors, status: :unprocessable_entity }
+        format.js      
       end
     end
   end
@@ -58,6 +66,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
